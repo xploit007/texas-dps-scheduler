@@ -20,9 +20,10 @@ export const getAuthTokenFromBroswer = async (): Promise<string> => {
         const browser = await puppeteer.launch({
             headless: process.env.HEADLESS?.toLowerCase() == 'false' ? false : 'shell',
             slowMo: 10,
-            args: ['--no-sandbox', '--disable-setuid-sandbox', '--disk-cache-size=0'],
+            args: ['--no-sandbox', '--disable-setuid-sandbox', '--disk-cache-size=0', '--ignore-certificate-errors'],
             executablePath: executablePath(),
             timeout: 0,
+            acceptInsecureCerts: true,
         });
         const [page] = await browser.pages();
 
